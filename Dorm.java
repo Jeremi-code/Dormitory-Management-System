@@ -21,4 +21,7 @@ public class Dorm {
     		System.out.println(e);
     	}
     }
+    public void removeMemeber(int id) {
+    	this.studentsList.remove(id);
+    }
 }
