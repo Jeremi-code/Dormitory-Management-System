@@ -6,7 +6,8 @@ public class Menu {
 		System.out.println("2) Manage Dorm");
 		System.out.println("3) Manage Block");
 		System.out.println("4) Manage Attendance");
-		System.out.println("5) Exit");
+		System.out.println("5) Manage proctor's switching schedule");
+		System.out.println("6) Exit");
 	}
 	
 	public static void printBlockMenu() {
@@ -51,6 +52,16 @@ public class Menu {
 	      System.out.println("4) Remove Student");
 	      System.out.println("5) Back ");
 	     
+	}
+
+	public static void printSwitchingMenu() {
+		System.out.println("Choose from the Menu Below");
+		System.out.println("======== Proctor switching Menu ========");
+		System.out.println("1) Set new switching schedule");
+		System.out.println("2) Update the current switching schedule");
+		System.out.println("3) Display proctor's switching schedule");
+		System.out.println("4) Back ");
+
 	}
 	
 }

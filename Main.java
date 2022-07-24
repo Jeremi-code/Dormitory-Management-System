@@ -20,9 +20,12 @@ public class Main {
             case 4:
                 Menu.printAttendanceMenu();
                 break;
+            case 5:
+                Menu.printSwitchingMenu();
+                break;
             default:
                 System.out.println("Chocie not recognised! Please, try again\n");
         }
-    } while (choice != 5);
+    } while (choice != 6);
   }
 }
