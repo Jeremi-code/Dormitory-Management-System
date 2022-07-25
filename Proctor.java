@@ -1,11 +1,11 @@
 public class Proctor {
     private String name, phoneNumber;
-    private Block block;
+    private int blockNumber;
 
-    public Proctor(String name, String phoneNumber, Block block) {
+    public Proctor(String name, String phoneNumber, int blockNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.block = block;
+        this.blockNumber = blockNumber;
 
     }
     
@@ -21,7 +21,8 @@ public class Proctor {
 
     public void setBlockNumber(int blockNumber)
     {
-        this.block.setBlockNumber(blockNumber);
+        // this.block.setBlockNumber(blockNumber);
+        this.blockNumber = blockNumber;
     }
     
     public String getName() {
