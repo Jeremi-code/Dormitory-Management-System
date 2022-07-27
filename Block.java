@@ -20,9 +20,6 @@ public class Block {
         this.numberOfProctors = 0;//proctorsList.size();
         // this.proctorsList = proctorsList;
     }
-    public String getName(){
-        return this.blockName;
-    }
 
     public void addProctor(ArrayList<Proctor> proctorList) {
     	try {
@@ -46,22 +43,13 @@ public class Block {
     public int getNumber() {
         return this.blockNumber;
     }
-	public int getNumberOfDorms() {
-		return this.numberOfDorms;
-	}
-	public int getNumberOfProctors() {
-		return this.numberOfProctors;
-	}
-	public ArrayList getProctorsList() {
-		return this.proctorsList;
-	}
+    public String getName(){return this.blockName;}
+	public int getNumberOfDorms() { return this.numberOfDorms; }
+	public int getNumberOfProctors() { return this.numberOfProctors; }
+	public ArrayList getProctorsList() { return this.proctorsList; }
 	public void addToProctorsList(ArrayList<Proctor> newProctorList) {
 		this.proctorsList.addAll(newProctorList);
 	}
-	public void setBlockName(String blockName) {
-        this.blockName = blockName;
-	}
-    public void setNumberOfDorms(int numberOfDorms) {
-        this.numberOfDorms = numberOfDorms;
-    }
+	public void setBlockName(String blockName) { this.blockName = blockName; }
+    public void setNumberOfDorms(int numberOfDorms) { this.numberOfDorms = numberOfDorms; }
 }

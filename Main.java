@@ -13,7 +13,32 @@ public class Main {
                     Menu.printStudentMenu();
                     break;
                 case 2:
-                    Menu.printDormMenu();
+                    do {
+                        Menu.printDormMenu();;
+                        // again:
+                        choice = S.nextInt();
+                        switch (choice) {
+                            case 1:
+                                Menu.addDormHandler();
+                                break;
+                            case 2:
+                                Menu.updateDormHander();
+                                break;
+                            case 3:
+                                Menu.displayDormHandler();
+                                break;
+                            case 4:
+                                Menu.removeDormHandler();
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                break MainMenu;
+                            default:
+                                System.out.println("Chocie not recognised! Please, try again\n");
+                                // break again;
+                        }
+                    } while (choice != 6);
                     break;
                 case 3:
                     do {
