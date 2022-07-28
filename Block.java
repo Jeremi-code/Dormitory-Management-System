@@ -157,18 +157,16 @@ public class Block {
         String name, phoneNumber;
         for(int i = 0; i < numberOfProctors; i++){
             System.out.println(String.format("Enter the name of proctor No %d", i+1));
-            // S.next();
-            // name = S.nextLine();
+      
             try{
                 name = reader.readLine();
-                System.out.println(String.format("Name %s", name));
-                // StringBufferInputStream.skip(256);
+                
+                
                 System.out.println(String.format("Enter the phoneNumber of proctor No %d", i+1));
-                // S.next();
-                // phoneNumber = S.nextLine();
+               
                 phoneNumber = reader.readLine();
 
-                System.out.println(String.format("Phone No %s", phoneNumber));
+              
                 Proctor newProctor = new Proctor(name, phoneNumber, blockNumber);
                 proctorsList.add(newProctor);
 
