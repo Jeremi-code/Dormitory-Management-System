@@ -5,12 +5,15 @@ public class Student {
 	private int age;
 	private int id;
 	private int dormNumber;
+	int[] attendance;
+
 	// private int block_Number;
 	public Student(String name, char gender, int id, int age, int dormNumber ){
 		this.studentName = name;
 		this.id = id;
 		this.age = age;
 		this.dormNumber = dormNumber;
+		this.attendance = new int[]{-1, -1, -1, -1, -1, -1, -1};
 	//	this.block_Number= blockNumber;
 	}
 	public void setDormNumber(int dormNumber) {
@@ -25,6 +28,5 @@ public class Student {
 	public char getGender(){ return this.gender; }
 	public int getAge(){ return this.age; }
 	public int getId(){ return this.id; }
-
 
 }

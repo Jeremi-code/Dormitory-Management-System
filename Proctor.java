@@ -32,7 +32,5 @@ public class Proctor {
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
-    
-
 
 }
