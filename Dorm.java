@@ -1,18 +1,22 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Formatter;
 
 public class Dorm {
 	private int dormNumber;
 	private int numberOfStudents;
 	private int block_Number;
-    private ArrayList<Student> studentsList = new ArrayList<>();
-    
+    public ArrayList<Student> studentsList = new ArrayList<>();
     public Dorm(int dormNumber, int numberOfStudents ) {
         this.dormNumber = dormNumber;
-        this.numberOfStudents = numberOfStudents;
+        this.numberOfStudents = 0;
 	//	this.block_Number = blockNumber;
-		this.studentsList = studentsList;
+	    this.studentsList = studentsList;
     }
-    
+
     public void addMember(Student student) {
     	try {
     		this.studentsList.add(student);
@@ -23,7 +27,7 @@ public class Dorm {
     		System.out.println(e);
     	}
     }
-    public void removeMemeber(int id) {
+    public void removeMember(int id) {
     	this.studentsList.remove(id);
     }
 	public void addToStudentList(ArrayList<Student> newStudentList) { this.studentsList.addAll(newStudentList); }
@@ -39,5 +43,145 @@ public class Dorm {
 	}
 	public ArrayList getStudentsList(){ return this.studentsList; }
 
+	public static void removeDormHandler(){
+		System.out.println("Choose the Dorm to remove all of it data : ");
+		displayDormHandler();
+		Scanner S = new Scanner(System.in);
+		int index;
+		index = S.nextInt() - 1;
+		Store.DormList.remove(index);
+		System.out.println("The Data is Deleted Successfully!");
+	}
+	public static void displayDormHandler() {
+		/*
+		System.out.println("List of Dorms");
+		for(int i = 0; i < Store.DormList.size(); i++){
+			System.out.println(String.format(" \tName: %s ", i+1, Store.BlockList.get(i).getName()));
+			System.out.println(String.format(" \tDorm Number: %d ", Store.DormList.get(i).getDormNumber()));
+			System.out.println(String.format(" \tCurrent Number of Students: %d ", Store.DormList.get(i).getNumberOfStudents()));
+		//	System.out.println(String.format(" \tNumber of Proctors: %d ", Store.BlockList.get(i).getNumberOfProctors()));
+			ArrayList<Student> studentsList= new ArrayList<>();
 
-}
+			studentsList.addAll(Store.DormList.get(i).getStudentsList());
+			System.out.println(String.format(" Students of Dorm are %s :", Store.DormList.get(i).()));
+			for(int j = 0; j < Store.DormList.size(); j++){
+				System.out.println(String.format(" %d)\tName: %s ", j+1, studentsList.get(j).getStudentName()));
+				System.out.println(String.format(" Id number : %d", studentsList.get(j).getId()));
+				System.out.println(String.format(" Gender : %s", studentsList.get(j).getGender()));
+				System.out.println(String.format(" Age : %d", studentsList.get(j).getAge()));
+				System.out.println(String.format(" Age : %d", studentsList.get(j).getAge()));
+
+			}
+		}    */
+
+		Formatter go7 = new Formatter();
+		System.out.println("List of Dorms");
+		for (int i = 0; i < Store.DormList.size(); i++) {
+			go7.format("%12s%12s%12s", "Block Name", "Dorm Number", "Number Of Students");
+			go7.format("%12s%12s%12s", Store.BlockList.get(i).getName(), Store.DormList.get(i).getDormNumber(), Store.DormList.get(i).getNumberOfStudents());
+			System.out.println(go7);
+			Store.DormList.get(i).studentsList.addAll(Store.DormList.get(i).getStudentsList());
+			System.out.println("List of Dorms");
+				for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++) {
+					go7.format("%12s%12s%12s", "Name", "Id Number", "Gender", "Age");
+					go7.format("%12s%12s%12s", Store.DormList.get(j).studentsList.get(j).getStudentName(), Store.DormList.get(j).studentsList.get(j).getId(), Store.DormList.get(j).studentsList.get(j).getGender(), Store.DormList.get(j).studentsList.get(j).getAge());
+					System.out.println(go7);
+				}
+			}
+		}
+
+	public static void addDormHandler() {
+		Scanner sgc = new Scanner(System.in);
+		BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
+		int dormNumber, blockNumber, numberOfStudents;
+		ArrayList<Student> studentsList = new ArrayList<>();
+		if(Store.DormList.size() == 0){
+			System.out.println("Add blocks first!");
+			try{
+				System.out.wait(1000);
+			}catch (InterruptedException e){
+				System.out.println(e.toString());
+			}
+			return;
+		}
+		else{
+			System.out.println("Choose Block: ");
+			Block.displayBlockHandler();
+			blockNumber = sgc.nextInt();
+		}
+		System.out.println("Enter Dorm number: ");
+		dormNumber = sgc.nextInt();
+		System.out.println("Enter number of students in the Dorm: ");
+		numberOfStudents = sgc.nextInt();
+
+		String name;
+		int id, age;
+		char gender ;
+		for(int i = 0; i < numberOfStudents; i++){
+			System.out.println("Enter the data for the "+ (i+1) + "th student.");
+			try{
+				System.out.println(String.format("Enter Name:  %d", i+1));
+				name = reader.readLine();
+				//	System.out.println(String.format("Name %s", name));
+				System.out.println(String.format("Enter Id: %d", i+1));
+				id = sgc.nextInt();
+				//	System.out.println(String.format("id %s", id));
+				System.out.println(String.format("Enter Age : %d", i+1));
+				age = sgc.nextInt();
+				System.out.println(String.format("Enter Gender : %d", i+1));
+				gender = sgc.next().charAt(0);
+				Student newStudent = new Student(name,gender, id, age, dormNumber );
+				studentsList.add(newStudent);
+
+			}catch(IOException exception){
+				System.out.println(exception.toString());
+			}
+		}
+		Dorm newDorm = new Dorm( dormNumber, numberOfStudents);
+		newDorm.addToStudentList(studentsList);
+		Store.DormList.add(newDorm);
+		System.out.println("The New Dorm Is Added Successfully!");
+	}
+
+	public static void updateDormHandler(){
+		System.out.println("Choose the dorm you want to update the details of: ");
+		displayDormHandler();
+		Scanner S = new Scanner(System.in);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		int index, num;
+		String str;
+		index = S.nextInt() - 1;
+		System.out.println("Which of the Dorm's details do you want to update?");
+		Dorm.displayDormDetails(Store.DormList.get(index));
+		int ch = S.nextInt();
+		switch (ch) {
+			case 1:
+					System.out.println("What should the new Dorm number be?");
+					num = S.nextInt();
+					Store.DormList.get(index).setDormNumber(num);
+					break;
+			case 2:
+				System.out.println("What should the new number be?");
+				num = S.nextInt();
+				Store.DormList.get(index).setBlock_Number(num);
+				break;
+			case 3:
+				System.out.println("What should the new number of Students be?");
+				num = S.nextInt();
+				Store.DormList.get(index).setNumberOfStudents(num);
+				break;
+			default:
+				System.out.println(" you entered wrong number.");
+				break;
+		}
+
+	}
+		private static void displayDormDetails(Dorm dorm) {
+			System.out.println("Dorm details here...");
+			System.out.println(String.format("1) Dorm Number: %s", dorm.getDormNumber()));
+			System.out.println(String.format("2) Block Number: %s", dorm.getBlock_Number()));
+			System.out.println(String.format("3) Number of Students: %d", dorm.getNumberOfStudents()));
+		}
+
+
+	}

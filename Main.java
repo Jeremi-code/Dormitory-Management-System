@@ -1,13 +1,13 @@
 import java.util.Scanner;
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		Scanner S = new Scanner(System.in);
 		int choice;
-        MainMenu:
         do {
             Menu.printMainMenu();
             choice = S.nextInt();
+            MainMenu:
             switch (choice) {
                 case 1:
                     Menu.printStudentMenu();
@@ -19,21 +19,21 @@ public class Main {
                         choice = S.nextInt();
                         switch (choice) {
                             case 1:
-                                Menu.addDormHandler();
+                                Dorm.addDormHandler();
                                 break;
                             case 2:
-                                Menu.updateDormHander();
+                                Dorm.updateDormHandler();
                                 break;
                             case 3:
-                                Menu.displayDormHandler();
+                                Dorm.displayDormHandler();
                                 break;
                             case 4:
-                                Menu.removeDormHandler();
+                                Dorm.removeDormHandler();
                                 break;
                             case 5:
-                                break;
-                            case 6:
                                 break MainMenu;
+                            case 6:
+                                break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                                 // break again;
@@ -46,31 +46,57 @@ public class Main {
                         choice = S.nextInt();
                         switch (choice) {
                             case 1:
-                                Menu.addBlockHandler();
+                                Block.addBlockHandler();
                                 break;
                             case 2:
-                                Menu.updateBlockHander();
+                                Block.updateBlockHandler();
                                 break;
                             case 3:
-                                Menu.displayBlockHandler();
+                                Block.displayBlockHandler();
                                 break;
                             case 4:
-                                Menu.removeBlockHandler();
+                                Block.removeBlockHandler();
                                 break;
                             case 5:
-                                break;
-                            case 6:
                                 break MainMenu;
+                            case 6:
+                                break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                         }
                     } while (choice != 6);
                     break;
                 case 4:
-                    Menu.printAttendanceMenu();
+                    do {
+                        Menu.printAttendanceMenu();
+                        choice = S.nextInt();
+                        switch (choice) {
+                            case 1:
+                                Attendance.takeNewAttendance();
+                                break;
+                            case 2:
+                                Attendance.updateAttendance();
+                                break;
+                            case 3:
+                                Attendance.displayAttendance();
+                                break;
+                            case 4:
+                                Attendance.reportAttendance();
+                                break;
+                            case 5:
+                                break MainMenu;
+                            case 6:
+                                break;
+                            default:
+                                System.out.println("Chocie not recognised! Please, try again\n");
+                        }
+                    } while (choice != 6);
+
                     break;
                 case 5:
                     Menu.printSwitchingMenu();
+                    break;
+                case 6:
                     break;
                 default:
                     System.out.println("Chocie not recognised! Please, try again\n");
