@@ -15,7 +15,7 @@ public class Dorm extends Operations implements Identifiers{
 	
     public Dorm(int dormNumber, int numberOfStudents, int blockIndex ) {
         this.dormNumber = dormNumber;
-        this.numberOfStudents = 0;
+        this.numberOfStudents = numberOfStudents;
 		this.blockIndex = blockIndex;
     }
 
@@ -57,22 +57,25 @@ public class Dorm extends Operations implements Identifiers{
 		System.out.println("The Data is Deleted Successfully!");
 	}
 	public static void displayAll() {
-		Formatter go7 = new Formatter();
+		StringBuilder sb = new StringBuilder();
+		Formatter go7 = new Formatter(sb);
 		System.out.println("List of Dorms");
-		for (int i = 0; i < Store.DormList.size(); i++) {
 
+		go7.format("%20s%20s%20s\n", "Block Name", "Dorm Number", "Number Of Students");
+		for (int i = 0; i < Store.DormList.size(); i++) {
 			//find the index of the Block where the dorm belongs
 			int index = Store.DormList.get(i).getBlockIndex();
-
-			go7.format("%12s%12s%12s", "Block Name", "Dorm Number", "Number Of Students");
-			go7.format("%12s%12s%12s", Store.BlockList.get(index).getName(), Store.DormList.get(i).getDormNumber(), Store.DormList.get(i).getNumberOfStudents());
+			go7.format("%20s%20s%20s\n", Store.BlockList.get(index-1).getName(), Store.DormList.get(i).getDormNumber(), Store.DormList.get(i).getNumberOfStudents());
 			System.out.println(go7);
-			Store.DormList.get(i).studentsList.addAll(Store.DormList.get(i).getStudentsList());
-			System.out.println("List of Dorms");
+			sb.setLength(0);
+			// refactor next for multiple dorms and/or students
+			// Store.DormList.get(i).studentsList.addAll(Store.DormList.get(i).getStudentsList());
+			System.out.println("List of Students");
+			go7.format("%20s%20s%20s\n", "Name", "Id Number", "Gender", "Age");
 			for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++) {
-				go7.format("%12s%12s%12s", "Name", "Id Number", "Gender", "Age");
-					go7.format("%12s%12s%12s", Store.DormList.get(j).studentsList.get(j).getStudentName(), Store.DormList.get(j).studentsList.get(j).getId(), Store.DormList.get(j).studentsList.get(j).getGender(), Store.DormList.get(j).studentsList.get(j).getAge());
+				go7.format("%20s%20s%20s\n", Store.DormList.get(i).studentsList.get(j).getStudentName(), Store.DormList.get(i).studentsList.get(j).getId(), Store.DormList.get(i).studentsList.get(j).getGender(), Store.DormList.get(i).studentsList.get(j).getAge());
 				System.out.println(go7);
+				sb.setLength(0);
 			}
 		}
 	}

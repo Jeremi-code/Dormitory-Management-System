@@ -133,7 +133,7 @@ public class Block extends Operations implements Identifiers {
         System.out.println(String.format("1) Name: %s", block.getName()));
         System.out.println(String.format("2) Number: %s", block.getNumber()));
         System.out.println(String.format("3) Number of dorms: %d", block.getNumberOfDorms()));
-        System.out.println(String.format("4) Number of dorms: %d", block.getNumberOfProctors()));
+        System.out.println(String.format("4) Number of proctors: %d", block.getNumberOfProctors()));
         ArrayList<Proctor> proctorsList= new ArrayList<>();
         ArrayList<Cleaner> CleanerList=new ArrayList<>();
 
@@ -142,7 +142,7 @@ public class Block extends Operations implements Identifiers {
 
         for(int j = 0; j < proctorsList.size(); j++){
             System.out.println(String.format("=======%d========", j+1));
-            System.out.println(String.format("Name: %s ", j+1, proctorsList.get(j).getName()));
+            System.out.println(String.format("Name: %s ", proctorsList.get(j).getName()));
             System.out.println(String.format("Phone number: %s", proctorsList.get(j).getPhoneNumber()));
         }
         CleanerList.addAll(block.getCleanerList());
@@ -150,9 +150,9 @@ public class Block extends Operations implements Identifiers {
 
         for(int j = 0; j < CleanerList.size(); j++){
             System.out.println(String.format("=======%d========", j+1));
-            System.out.println(String.format("Name: %s ", j+1, CleanerList.get(j).getCleanerName()));
-            System.out.println(String.format("Name: %s ", j+1, CleanerList.get(j).getCleanerGender()));
-            System.out.println(String.format("Name: %s ", j+1, CleanerList.get(j).getCleanerAge()));
+            System.out.println(String.format("Name: %s ", CleanerList.get(j).getCleanerName()));
+            System.out.println(String.format("Gender: %s ", CleanerList.get(j).getCleanerGender()));
+            System.out.println(String.format("Age: %d",  CleanerList.get(j).getCleanerAge()));
             System.out.println(String.format("Phone number: %s", CleanerList.get(j).getPhoneNumber()));
         }
         
@@ -161,41 +161,43 @@ public class Block extends Operations implements Identifiers {
     public static void update() {
         System.out.println("Choose the block you want to update the details of: ");
         displayAll();
-        Scanner S = new Scanner(System.in);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int index, num;
-        String str;
+        if(Store.BlockList.size() == 0){
+            return;
+        }else{
+            Scanner S = new Scanner(System.in);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            int index, num;
+            String str;
+            try {
+                index = S.nextInt() - 1;
+                System.out.println("Which of the block's details do you want to update?");
+                Block.displayOne(Store.BlockList.get(index));
+                int ch = S.nextInt();
+                switch (ch) {
+                    case 1:
+                        System.out.println("What should the new name be?");
+                        str = reader.readLine();
+                        Store.BlockList.get(index).setBlockName(str);
+                        break;
 
-        
-                try {
-                    index = S.nextInt() - 1;
-                    System.out.println("Which of the block's details do you want to update?");
-                    displayOne(Store.BlockList.get(index));
-                    int ch = S.nextInt();
-                    switch (ch) {
-                        case 1:
-                            System.out.println("What should the new name be?");
-                            str = reader.readLine();
-                            Store.BlockList.get(index).setBlockName(str);
-                            break;
-
-                        case 2:
-                            System.out.println("What should the new number be?");
-                            num = S.nextInt();
-                            Store.BlockList.get(index).setBlockNumber(num);
-                            break;
-                        case 3:
-                            System.out.println("What should the new number of dorms be?");
-                            num = S.nextInt();
-                            Store.BlockList.get(index).setNumberOfDorms(num);
-                            break;
-
-                        default:
-                            break;
-                    }
-                }catch(Exception e){
-                    System.out.println("type incompatible");
+                    case 2:
+                        System.out.println("What should the new number be?");
+                        num = S.nextInt();
+                        Store.BlockList.get(index).setBlockNumber(num);
+                        break;
+                    case 3:
+                        System.out.println("What should the new number of dorms be?");
+                        num = S.nextInt();
+                        Store.BlockList.get(index).setNumberOfDorms(num);
+                        break;
+                    default:
+                        break;
                 }
+            }catch(Exception e){
+                System.out.println("type incompatible");
+            }
+            
+        }
     }
     // public void read(){
     //     System.out.println(String.format("Name %s", this.blockName));
@@ -279,7 +281,7 @@ public class Block extends Operations implements Identifiers {
                 System.out.println(String.format("Enter the age of Cleaner No %d", i+1));
                 CleanerAge = S.nextInt();
 
-                System.out.println(String.format("Enter the phoneNumber of proctor No %d", i+1));
+                System.out.println(String.format("Enter the phoneNumber of cleaner No %d", i+1));
                 CleanerphoneNumber = reader.readLine();
 
                 Cleaner newCleaner = new Cleaner(CleanerphoneNumber, blockNumber, CleanerName, CleanerGender, CleanerAge);
