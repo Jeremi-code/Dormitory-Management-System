@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Block extends Operations implements Identifiers {
@@ -38,24 +39,26 @@ public class Block extends Operations implements Identifiers {
     	}
     }
     public void addProctor(ArrayList<Proctor> proctorList) {
-    	try {
-    		this.proctorsList.addAll(proctorList);
-    		this.numberOfProctors += proctorList.size();
-    		// proctor.setBlockNumber(this.blockNumber);
-    	} catch (Exception e) {
-    		System.out.print("Error: ");
-    		System.out.println(e);
-    	}
+        try {
+            this.proctorsList.addAll(proctorList);
+            this.numberOfProctors += proctorList.size();
+            // proctor.setBlockNumber(this.blockNumber);
+        } catch (Exception e) {
+            System.out.println("Input Mismatch");
+        }
+
+    }
+
+    public void setBlockNumber(int blockNumber) {
+        try {
+            this.blockNumber = blockNumber;
+        } catch (Exception e) {
+
+            System.out.println("invalid try");
+        }
     }
     
-    public void setBlockNumber(int blockNumber) {
-    	try {
-    		this.blockNumber = blockNumber;
-    	} catch (Exception e) {
-    		System.out.print("Error: ");
-    		System.out.println(e);
-    	}
-    }
+
     public int getNumber() {
         return this.blockNumber;
     }
@@ -79,15 +82,21 @@ public class Block extends Operations implements Identifiers {
         displayAll();
         Scanner S = new Scanner(System.in);
         int index;
-        index = S.nextInt() - 1;
-        Store.BlockList.remove(index);
-        System.out.println("Delete Successful!");
+        try {
+            index = S.nextInt() - 1;
+            Store.BlockList.remove(index);
+            System.out.println("Delete Successful!");
+        } catch (Exception e) {
+            System.out.println("input Mismatch");
+
+        }
     }
 
     public static void displayAll() {
         System.out.println("List of Blocks");
         if(Store.BlockList.size() == 0){
             System.out.println("There is no Block added, Please add Blocks  first in the Block menu!");
+            return;
         }
         for(int i = 0; i < Store.BlockList.size(); i++){
             System.out.println(String.format("%d)\tName: %s ", i+1, Store.BlockList.get(i).getName()));
@@ -156,60 +165,64 @@ public class Block extends Operations implements Identifiers {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int index, num;
         String str;
-        index = S.nextInt() - 1;
-        System.out.println("Which of the block's details do you want to update?");
-        displayOne(Store.BlockList.get(index));
-        int ch = S.nextInt();
-        switch (ch) {
-            case 1:
+
+        
                 try {
-                    System.out.println("What should the new name be?");
-                    str = reader.readLine();
-                    Store.BlockList.get(index).setBlockName(str);
-                    break;
+                    index = S.nextInt() - 1;
+                    System.out.println("Which of the block's details do you want to update?");
+                    displayOne(Store.BlockList.get(index));
+                    int ch = S.nextInt();
+                    switch (ch) {
+                        case 1:
+                            System.out.println("What should the new name be?");
+                            str = reader.readLine();
+                            Store.BlockList.get(index).setBlockName(str);
+                            break;
 
-                } catch (IOException e) {
-                    //TODO: handle exception
-                    System.out.println("Menu.Error()");
+                        case 2:
+                            System.out.println("What should the new number be?");
+                            num = S.nextInt();
+                            Store.BlockList.get(index).setBlockNumber(num);
+                            break;
+                        case 3:
+                            System.out.println("What should the new number of dorms be?");
+                            num = S.nextInt();
+                            Store.BlockList.get(index).setNumberOfDorms(num);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }catch(Exception e){
+                    System.out.println("type incompatible");
                 }
-            case 2:
-                System.out.println("What should the new number be?");
-                num = S.nextInt();
-                Store.BlockList.get(index).setBlockNumber(num);
-                break;
-            case 3:
-                System.out.println("What should the new number of dorms be?");
-                num = S.nextInt();
-                Store.BlockList.get(index).setNumberOfDorms(num);
-                break;
-
-            default:
-                break;
-        }
     }
-    public void read(){
-        System.out.println(String.format("Name %s", this.blockName));
-        System.out.println(String.format("Number %s", this.blockNumber));
-        System.out.println(String.format("Number of dorms %d", this.numberOfDorms));
-        System.out.println(String.format("Number of floors %s", this.blockName));
-        System.out.println(String.format("Number of dorms per floor %s", this.blockName));
-        System.out.println(String.format("Number of proctors %d", this.numberOfProctors));
-        System.out.println(String.format("Number of proctors %d", this.numberOfCleaners));
-        for(int j = 0; j < this.proctorsList.size(); j++){
-            System.out.println(String.format("=======%d========", j+1));
-            System.out.println(String.format("Name: %s ", j+1, this.proctorsList.get(j).getName()));
-            System.out.println(String.format("Phone number: %s", this.proctorsList.get(j).getPhoneNumber()));
-        }
-        for(int j = 0; j < this.CleanerList.size(); j++){
-            System.out.println(String.format("=======%d========", j+1));
-            System.out.println(String.format("Name: %s ", j+1, this.CleanerList.get(j).getCleanerName()));
-            System.out.println(String.format("Name: %s ", j+1, this.CleanerList.get(j).getCleanerGender()));
-            System.out.println(String.format("Name: %s ", j+1, this.CleanerList.get(j).getCleanerAge()));
-            System.out.println(String.format("Phone number: %s", this.CleanerList.get(j).getPhoneNumber()));
-        }
-    }
+    // public void read(){
+    //     System.out.println(String.format("Name %s", this.blockName));
+    //     System.out.println(String.format("Number %s", this.blockNumber));
+    //     System.out.println(String.format("Number of dorms %d", this.numberOfDorms));
+    //     System.out.println(String.format("Number of floors %s", this.blockName));
+    //     System.out.println(String.format("Number of dorms per floor %s", this.blockName));
+    //     System.out.println(String.format("Number of proctors %d", this.numberOfProctors));
+    //     System.out.println(String.format("Number of proctors %d", this.numberOfCleaners));
+    //     for(int j = 0; j < this.proctorsList.size(); j++){
+    //         System.out.println(String.format("=======%d========", j+1));
+    //         System.out.println(String.format("Name: %s ", j+1, this.proctorsList.get(j).getName()));
+    //         System.out.println(String.format("Phone number: %s", this.proctorsList.get(j).getPhoneNumber()));
+    //     }
+    //     for(int j = 0; j < this.CleanerList.size(); j++){
+    //         System.out.println(String.format("=======%d========", j+1));
+    //         System.out.println(String.format("Name: %s ", j+1, this.CleanerList.get(j).getCleanerName()));
+    //         System.out.println(String.format("Name: %s ", j+1, this.CleanerList.get(j).getCleanerGender()));
+    //         System.out.println(String.format("Name: %s ", j+1, this.CleanerList.get(j).getCleanerAge()));
+    //         System.out.println(String.format("Phone number: %s", this.CleanerList.get(j).getPhoneNumber()));
+    //     }
+    // }
     
+    
+
     public static void create() {
+      try{    
         Scanner S = new Scanner(System.in);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String blockName;
@@ -230,20 +243,25 @@ public class Block extends Operations implements Identifiers {
         numberOfProctors = S.nextInt();
         String name, phoneNumber;
         for(int i = 0; i < numberOfProctors; i++){
-            
-            try{
-                System.out.println(String.format("Enter the name of proctor No %d", i+1));
-                name = reader.readLine();
+            System.out.println(String.format("Enter the name of proctor No %d", i+1));
 
+            try {
+                name = reader.readLine();
+                
+                
                 System.out.println(String.format("Enter the phoneNumber of proctor No %d", i+1));
+               
                 phoneNumber = reader.readLine();
 
+              
                 Proctor newProctor = new Proctor(name, phoneNumber, blockNumber);
                 proctorsList.add(newProctor);
+            } 
+           
+            catch(Exception exception){
+                System.out.println("type incompatible"); 
+                       }
 
-            }catch(IOException exception){
-                System.out.println(exception.toString());
-            }
 
         }
         System.out.println("Enter number of Cleaners for the block: ");
@@ -276,5 +294,10 @@ public class Block extends Operations implements Identifiers {
         newBlock.addCleaner(CleanerList);
         Store.BlockList.add(newBlock);
         System.out.println("Block Added Successfully!"); 
+    }catch(Exception e){
+        System.out.println("incompatible type");
     }
+
+}
+
 }

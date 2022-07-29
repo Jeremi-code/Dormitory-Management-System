@@ -53,6 +53,8 @@ public class Menu {
 		  System.out.println("6) Exit ");
 
 	}
+
+
 	public static void printCleanerMenu() {
 		System.out.println("Choose from the Menu Below");
 		System.out.println("======== Cleaner Menu ========");

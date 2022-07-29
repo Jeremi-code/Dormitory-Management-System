@@ -1,6 +1,6 @@
 import java.util.Formatter;
 import java.util.Scanner;
- public class Attendance {
+ public class Attendance implements Identifiers {
      public static void makeAllAbsent(int day){
         int index=day-1;
         for(int i=0; i < Store.DormList.size(); i++){
@@ -61,7 +61,7 @@ import java.util.Scanner;
               System.out.println(" Attendance is taken su   ");
     }
     }
-    public static void displayAttendance(){
+    public static void displayAll(){
         int sizeCounter=0;
         for (int i = 0; i < Store.DormList.size(); i++) {
             for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++){

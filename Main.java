@@ -17,16 +17,16 @@ public class Main {
                         choice = S.nextInt();
                         switch (choice) {
                             case 1:
-                                Dorm.addDormHandler();
+                                Dorm.create();
                                 break;
                             case 2:
-                                Dorm.updateDormHandler();
+                                Dorm.update();
                                 break;
                             case 3:
-                                Dorm.displayDormHandler();
+                                Dorm.displayAll();
                                 break;
                             case 4:
-                                Dorm.removeDormHandler();
+                                Dorm.delete();
                                 break;
                             case 5:
                                 break MainMenu;
@@ -75,7 +75,7 @@ public class Main {
                                 Attendance.takeNewAttendance();
                                 break;
                             case 2:
-                                Attendance.displayAttendance();
+                                Attendance.displayAll();
                                 break;
                             case 3:
                                 Attendance.reportAttendance();
