@@ -163,7 +163,7 @@ public class Block extends Operations implements Identifiers {
     
     }
 
-    public static void addBlockHandler() {
+    public static void create() {
       try{    
         Scanner S = new Scanner(System.in);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

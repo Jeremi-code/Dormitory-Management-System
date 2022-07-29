@@ -9,14 +9,15 @@ import java.util.InputMismatchException;
 public class Dorm extends Operations implements Identifiers{
 	private int dormNumber;
 	private int numberOfStudents;
-	private int block_Number;
-	public ArrayList<Student> studentsList = new ArrayList<>();
-    public Dorm(int dormNumber, int numberOfStudents ) {
-		this.dormNumber = dormNumber;
-		this.numberOfStudents = 0;
-	//	this.block_Number = blockNumber;
-		this.studentsList = studentsList;
-	}
+	// private int block_Number;
+	private int blockIndex;
+    public ArrayList<Student> studentsList = new ArrayList<>();
+	
+    public Dorm(int dormNumber, int numberOfStudents, int blockIndex ) {
+        this.dormNumber = dormNumber;
+        this.numberOfStudents = 0;
+		this.blockIndex = blockIndex;
+    }
 
 	public void addMember(Student student) {
 		try {
@@ -35,8 +36,8 @@ public class Dorm extends Operations implements Identifiers{
 	public void addToStudentList(ArrayList<Student> newStudentList) { this.studentsList.addAll(newStudentList); }
 	public void setDormNumber(int dormNumber){ this.dormNumber = dormNumber; }
 	public void setNumberOfStudents(int numberOfStudents) {this.numberOfStudents = numberOfStudents;}
-	public void setBlock_Number(int blockNumber){ this.block_Number = blockNumber; }
-	public int getBlock_Number(){ return this.block_Number; }
+	public void setBlockIndex(int blockIndex){ this.blockIndex = blockIndex; }
+	public int getBlockIndex(){ return this.blockIndex; }
 	public int getDormNumber() {
 		return this.dormNumber;
 	}
@@ -59,8 +60,12 @@ public class Dorm extends Operations implements Identifiers{
 		Formatter go7 = new Formatter();
 		System.out.println("List of Dorms");
 		for (int i = 0; i < Store.DormList.size(); i++) {
+
+			//find the index of the Block where the dorm belongs
+			int index = Store.DormList.get(i).getBlockIndex();
+
 			go7.format("%12s%12s%12s", "Block Name", "Dorm Number", "Number Of Students");
-			go7.format("%12s%12s%12s", Store.BlockList.get(i).getName(), Store.DormList.get(i).getDormNumber(), Store.DormList.get(i).getNumberOfStudents());
+			go7.format("%12s%12s%12s", Store.BlockList.get(index).getName(), Store.DormList.get(i).getDormNumber(), Store.DormList.get(i).getNumberOfStudents());
 			System.out.println(go7);
 			Store.DormList.get(i).studentsList.addAll(Store.DormList.get(i).getStudentsList());
 			System.out.println("List of Dorms");
@@ -75,7 +80,7 @@ public class Dorm extends Operations implements Identifiers{
 	public static void create() {
 		Scanner sgc = new Scanner(System.in);
 		BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
-		int dormNumber, blockNumber, numberOfStudents;
+		int dormNumber, blockIndex, numberOfStudents;
 		ArrayList<Student> studentsList = new ArrayList<>();
 		if(Store.DormList.size() == 0){
 				System.out.println("Add blocks first!");
@@ -84,7 +89,7 @@ public class Dorm extends Operations implements Identifiers{
 		else{
 			System.out.println("Choose Block: ");
 			Block.displayAll();
-			blockNumber = sgc.nextInt();
+			blockIndex = sgc.nextInt();
 		}
 		System.out.println("Enter Dorm number: ");
 		dormNumber = sgc.nextInt();
@@ -137,21 +142,20 @@ public class Dorm extends Operations implements Identifiers{
 					num = S.nextInt();
 					Store.DormList.get(index).setDormNumber(num);
 					break;
-				case 2:
-					System.out.println("What should the new number be?");
-					num = S.nextInt();
-					Store.DormList.get(index).setBlock_Number(num);
-					break;
-				case 3:
-					System.out.println("What should the new number of Students be?");
-					num = S.nextInt();
-					Store.DormList.get(index).setNumberOfStudents(num);
-					break;
-				default:
-					System.out.println(" you entered wrong number.");
-					break;
-			}
-		
+			case 2:
+				System.out.println("What should the new block for this dorm be? (1, 2, 3 ...)");
+				Block.displayAll();
+				num = S.nextInt();
+				Store.DormList.get(index).setBlockIndex(num);
+				break;
+			case 3:
+				System.out.println("What should the new number of Students be?");
+				num = S.nextInt();
+				Store.DormList.get(index).setNumberOfStudents(num);
+				break;
+			default:
+				System.out.println(" you entered wrong number.");
+				break;
 		}
 	  }
 	  catch(InputMismatchException e){
@@ -168,7 +172,11 @@ public class Dorm extends Operations implements Identifiers{
 	private static void displayOne(Dorm dorm) {
 		System.out.println("Dorm details here...");
 		System.out.println(String.format("1) Dorm Number: %s", dorm.getDormNumber()));
-		System.out.println(String.format("2) Block Number: %s", dorm.getBlock_Number()));
+
+		//access blockNumber of the Block where the Dorm belongs through dorm from Store
+		int blockIndex = dorm.getBlockIndex();
+		System.out.println(String.format("2) Block Number: %d", Store.BlockList.get(blockIndex).getNumber()));
+
 		System.out.println(String.format("3) Number of Students: %d", dorm.getNumberOfStudents()));
 		}
 	

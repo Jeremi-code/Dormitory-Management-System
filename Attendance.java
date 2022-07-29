@@ -1,6 +1,6 @@
 import java.util.Formatter;
 import java.util.Scanner;
- public class Attendance {
+ public class Attendance implements Identifiers {
      public static void makeAllAbsent(int day){
         int index=day-1;
         for(int i=0; i < Store.DormList.size(); i++){
@@ -52,7 +52,7 @@ import java.util.Scanner;
     public static void updateAttendance(){
 
     }
-    public static void displayAttendance(){
+    public static void displayAll(){
        Formatter sgc=new Formatter();
        sgc.format("%10s%10s%10s%10s%10s%10s","Name","Id","Dorm_Number","monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 
