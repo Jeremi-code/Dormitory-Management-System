@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Block {
+public class Block extends Operations implements Identifiers {
     // public static final String ANSI_RESET = "\u001B[0m";
     // public static final String ANSI_YELLOW = "\u001B[33m";
     private int blockNumber;
@@ -59,9 +59,9 @@ public class Block {
 	public void setBlockName(String blockName) { this.blockName = blockName; }
     public void setNumberOfDorms(int numberOfDorms) { this.numberOfDorms = numberOfDorms; }
 
-    public static void removeBlockHandler() {
+    public static void delete() {
         System.out.println("Choose the block you want to delete: ");
-        displayBlockHandler();
+        displayAll();
         Scanner S = new Scanner(System.in);
         int index;
         index = S.nextInt() - 1;
@@ -69,7 +69,7 @@ public class Block {
         System.out.println("Delete Successful!");
     }
 
-    public static void displayBlockHandler() {
+    public static void displayAll() {
         System.out.println("List of Blocks");
         if(Store.BlockList.size() == 0){
             System.out.println("There is no Block added, Please add Blocks  first in the Block menu!");
@@ -91,24 +91,37 @@ public class Block {
         }
     }
 
-    public static void displayBlockDetails(Block block){
+    
+    public static void displayOne(Block block){
         System.out.println("Block details here...");
 
         System.out.println(String.format("1) Name: %s", block.getName()));
         System.out.println(String.format("2) Number: %s", block.getNumber()));
         System.out.println(String.format("3) Number of dorms: %d", block.getNumberOfDorms()));
+        System.out.println(String.format("4) Number of dorms: %d", block.getNumberOfProctors()));
+        ArrayList<Proctor> proctorsList= new ArrayList<>();
+
+        proctorsList.addAll(block.getProctorsList());
+        System.out.println(String.format(" Proctors of %s Block ", block.getName()));
+
+        for(int j = 0; j < proctorsList.size(); j++){
+            System.out.println(String.format("=======%d========", j+1));
+            System.out.println(String.format("Name: %s ", j+1, proctorsList.get(j).getName()));
+            System.out.println(String.format("Phone number: %s", proctorsList.get(j).getPhoneNumber()));
+        }
+        
     }
 
-    public static void updateBlockHandler() {
+    public static void update() {
         System.out.println("Choose the block you want to update the details of: ");
-        displayBlockHandler();
+        displayAll();
         Scanner S = new Scanner(System.in);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int index, num;
         String str;
         index = S.nextInt() - 1;
         System.out.println("Which of the block's details do you want to update?");
-        displayBlockDetails(Store.BlockList.get(index));
+        displayOne(Store.BlockList.get(index));
         int ch = S.nextInt();
         switch (ch) {
             case 1:
@@ -137,10 +150,23 @@ public class Block {
                 break;
         }
     }
-
-    public static void addBlockHandler() {
+    public void read(){
+        System.out.println(String.format("Name %s", this.blockName));
+        System.out.println(String.format("Number %s", this.blockNumber));
+        System.out.println(String.format("Number of dorms %d", this.numberOfDorms));
+        System.out.println(String.format("Number of floors %s", this.blockName));
+        System.out.println(String.format("Number of dorms per floor %s", this.blockName));
+        System.out.println(String.format("Number of proctors %d", this.numberOfProctors));
+        for(int j = 0; j < this.proctorsList.size(); j++){
+            System.out.println(String.format("=======%d========", j+1));
+            System.out.println(String.format("Name: %s ", j+1, this.proctorsList.get(j).getName()));
+            System.out.println(String.format("Phone number: %s", this.proctorsList.get(j).getPhoneNumber()));
+        }
+    }
+    
+    public static void create() {
         Scanner S = new Scanner(System.in);
-        BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String blockName;
         int blockNumber, numberOfFloors, dormPerFloor, numberOfProctors;
         ArrayList<Proctor> proctorsList = new ArrayList<>();
@@ -156,19 +182,14 @@ public class Block {
         numberOfProctors = S.nextInt();
         String name, phoneNumber;
         for(int i = 0; i < numberOfProctors; i++){
-            System.out.println(String.format("Enter the name of proctor No %d", i+1));
-            // S.next();
-            // name = S.nextLine();
+            
             try{
+                System.out.println(String.format("Enter the name of proctor No %d", i+1));
                 name = reader.readLine();
-                System.out.println(String.format("Name %s", name));
-                // StringBufferInputStream.skip(256);
+
                 System.out.println(String.format("Enter the phoneNumber of proctor No %d", i+1));
-                // S.next();
-                // phoneNumber = S.nextLine();
                 phoneNumber = reader.readLine();
 
-                System.out.println(String.format("Phone No %s", phoneNumber));
                 Proctor newProctor = new Proctor(name, phoneNumber, blockNumber);
                 proctorsList.add(newProctor);
 

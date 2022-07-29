@@ -46,16 +46,16 @@ public class Main {
                         choice = S.nextInt();
                         switch (choice) {
                             case 1:
-                                Block.addBlockHandler();
+                                Block.create();
                                 break;
                             case 2:
-                                Block.updateBlockHandler();
+                                Block.update();
                                 break;
                             case 3:
-                                Block.displayBlockHandler();
+                                Block.displayAll();
                                 break;
                             case 4:
-                                Block.removeBlockHandler();
+                                Block.delete();
                                 break;
                             case 5:
                                 break MainMenu;
