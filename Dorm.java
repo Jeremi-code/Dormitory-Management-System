@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Formatter;
+import java.util.InputMismatchException;
 
 public class Dorm extends Operations implements Identifiers{
 	private int dormNumber;
@@ -18,19 +19,20 @@ public class Dorm extends Operations implements Identifiers{
 		this.blockIndex = blockIndex;
     }
 
-    public void addMember(Student student) {
-    	try {
-    		this.studentsList.add(student);
-    		this.numberOfStudents++;
-    		student.setDormNumber(this.dormNumber);
+	public void addMember(Student student) {
+		try {
+			this.studentsList.add(student);
+			this.numberOfStudents++;
+			student.setDormNumber(this.dormNumber);
     	}catch(Exception e) {
-    		System.out.print("Error: ");
-    		System.out.println(e);
-    	}
-    }
-    public void removeMember(int id) {
-    	this.studentsList.remove(id);
-    }
+			System.out.print("Error: ");
+			System.out.println(e);
+		}
+	}
+
+	public void removeMember(int id) {
+		this.studentsList.remove(id);
+	}
 	public void addToStudentList(ArrayList<Student> newStudentList) { this.studentsList.addAll(newStudentList); }
 	public void setDormNumber(int dormNumber){ this.dormNumber = dormNumber; }
 	public void setNumberOfStudents(int numberOfStudents) {this.numberOfStudents = numberOfStudents;}
@@ -39,6 +41,7 @@ public class Dorm extends Operations implements Identifiers{
 	public int getDormNumber() {
 		return this.dormNumber;
 	}
+
 	public int getNumberOfStudents() {
 		return this.numberOfStudents;
 	}
@@ -66,13 +69,13 @@ public class Dorm extends Operations implements Identifiers{
 			System.out.println(go7);
 			Store.DormList.get(i).studentsList.addAll(Store.DormList.get(i).getStudentsList());
 			System.out.println("List of Dorms");
-				for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++) {
-					go7.format("%12s%12s%12s", "Name", "Id Number", "Gender", "Age");
+			for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++) {
+				go7.format("%12s%12s%12s", "Name", "Id Number", "Gender", "Age");
 					go7.format("%12s%12s%12s", Store.DormList.get(j).studentsList.get(j).getStudentName(), Store.DormList.get(j).studentsList.get(j).getId(), Store.DormList.get(j).studentsList.get(j).getGender(), Store.DormList.get(j).studentsList.get(j).getAge());
-					System.out.println(go7);
-				}
+				System.out.println(go7);
 			}
 		}
+	}
 
 	public static void create() {
 		Scanner sgc = new Scanner(System.in);
@@ -80,14 +83,9 @@ public class Dorm extends Operations implements Identifiers{
 		int dormNumber, blockIndex, numberOfStudents;
 		ArrayList<Student> studentsList = new ArrayList<>();
 		if(Store.DormList.size() == 0){
-			System.out.println("Add blocks first!");
-			try{
-				System.out.wait(1000);
-			}catch (InterruptedException e){
-				System.out.println(e.toString());
+				System.out.println("Add blocks first!");
+				return;
 			}
-			return;
-		}
 		else{
 			System.out.println("Choose Block: ");
 			Block.displayAll();
@@ -98,12 +96,11 @@ public class Dorm extends Operations implements Identifiers{
 		System.out.println("Enter number of students in the Dorm: ");
 		numberOfStudents = sgc.nextInt();
 
-		String name;
-		int id, age;
-		char gender ;
-		for(int i = 0; i < numberOfStudents; i++){
-			System.out.println("Enter the data for the "+ (i+1) + "th student.");
-			try{
+			String name;
+			int id, age;
+			char gender ;
+			for(int i = 0; i < numberOfStudents; i++){
+				System.out.println("Enter the data for the "+ (i+1) + "th student.");
 				System.out.println(String.format("Enter Name:  %d", i+1));
 				name = reader.readLine();
 				//	System.out.println(String.format("Name %s", name));
@@ -116,12 +113,7 @@ public class Dorm extends Operations implements Identifiers{
 				gender = sgc.next().charAt(0);
 				Student newStudent = new Student(name,gender, id, age, dormNumber );
 				studentsList.add(newStudent);
-
-			}catch(IOException exception){
-				System.out.println(exception.toString());
-			}
-		}
-		Dorm newDorm = new Dorm( dormNumber, numberOfStudents, blockIndex);
+				Dorm newDorm = new Dorm( dormNumber, numberOfStudents);
 		newDorm.addToStudentList(studentsList);
 		Store.DormList.add(newDorm);
 		System.out.println("The New Dorm Is Added Successfully!");
@@ -130,16 +122,22 @@ public class Dorm extends Operations implements Identifiers{
 	public static void update(){
 		System.out.println("Choose the dorm you want to update the details of: ");
 		displayAll();
+		try{
 		Scanner S = new Scanner(System.in);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		int index, num;
+        int index, num;
 		String str;
-		index = S.nextInt() - 1;
-		System.out.println("Which of the Dorm's details do you want to update?");
-		Dorm.displayOne(Store.DormList.get(index));
-		int ch = S.nextInt();
-		switch (ch) {
-			case 1:
+		if (Store.DormList.size() == 0) {
+			System.out.println("There is no available dorm!!!");
+			return;
+		} 
+		else {
+			index = S.nextInt() - 1;
+			System.out.println("Which of the Dorm's details do you want to update?");
+			Dorm.displayDormDetails(Store.DormList.get(index));
+			int ch = S.nextInt();
+			switch (ch) {
+				case 1:
 					System.out.println("What should the new Dorm number be?");
 					num = S.nextInt();
 					Store.DormList.get(index).setDormNumber(num);
@@ -159,8 +157,18 @@ public class Dorm extends Operations implements Identifiers{
 				System.out.println(" you entered wrong number.");
 				break;
 		}
+	  }
+	  catch(InputMismatchException e){
+		System.out.println("Invalid input");
 
+		
 	}
+	catch(IndexOutOfBoundsException E){
+		System.out.println("out of bound error");
+	}
+}
+
+
 	private static void displayOne(Dorm dorm) {
 		System.out.println("Dorm details here...");
 		System.out.println(String.format("1) Dorm Number: %s", dorm.getDormNumber()));
@@ -170,7 +178,7 @@ public class Dorm extends Operations implements Identifiers{
 		System.out.println(String.format("2) Block Number: %d", Store.BlockList.get(blockIndex).getNumber()));
 
 		System.out.println(String.format("3) Number of Students: %d", dorm.getNumberOfStudents()));
-	}
+		}
+	
 
-
-	}
+}
