@@ -70,14 +70,12 @@ public class Menu {
 
 	public static void printCleanerMenu() {
 		System.out.println("Choose from the Menu Below");
-		System.out.println("======== Proctor switching Menu ========");
+		System.out.println("======== Cleaner Menu ========");
 		System.out.println("1) Add new cleaner");
-		System.out.println("2) Update Cleaners");
-		System.out.println("3) Display the cleaners' list");
-		System.out.println("4) Back ");
-		System.out.println("5) Exit ");
+		System.out.println("2) Display the cleaners' list");
+		System.out.println("3) Back");
+		System.out.println("4) Exit");
 	}
-
 }
 
 
