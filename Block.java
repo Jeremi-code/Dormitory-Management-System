@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Block {
@@ -28,24 +29,26 @@ public class Block {
     }
 
     public void addProctor(ArrayList<Proctor> proctorList) {
-    	try {
-    		this.proctorsList.addAll(proctorList);
-    		this.numberOfProctors += proctorList.size();
-    		// proctor.setBlockNumber(this.blockNumber);
-    	} catch (Exception e) {
-    		System.out.print("Error: ");
-    		System.out.println(e);
-    	}
+        try {
+            this.proctorsList.addAll(proctorList);
+            this.numberOfProctors += proctorList.size();
+            // proctor.setBlockNumber(this.blockNumber);
+        } catch (Exception e) {
+            System.out.println("Input Mismatch");
+        }
+
+    }
+
+    public void setBlockNumber(int blockNumber) {
+        try {
+            this.blockNumber = blockNumber;
+        } catch (Exception e) {
+
+            System.out.println("invalid try");
+        }
     }
     
-    public void setBlockNumber(int blockNumber) {
-    	try {
-    		this.blockNumber = blockNumber;
-    	} catch (Exception e) {
-    		System.out.print("Error: ");
-    		System.out.println(e);
-    	}
-    }
+
     public int getNumber() {
         return this.blockNumber;
     }
@@ -53,9 +56,9 @@ public class Block {
 	public int getNumberOfDorms() { return this.numberOfDorms; }
 	public int getNumberOfProctors() { return this.numberOfProctors; }
 	public ArrayList getProctorsList() { return this.proctorsList; }
-	public void addToProctorsList(ArrayList<Proctor> newProctorList) {
-		this.proctorsList.addAll(newProctorList);
-	}
+    public void addToProctorsList(ArrayList<Proctor> newProctorList) {
+        this.proctorsList.addAll(newProctorList);
+    }
 	public void setBlockName(String blockName) { this.blockName = blockName; }
     public void setNumberOfDorms(int numberOfDorms) { this.numberOfDorms = numberOfDorms; }
 
@@ -64,15 +67,21 @@ public class Block {
         displayBlockHandler();
         Scanner S = new Scanner(System.in);
         int index;
-        index = S.nextInt() - 1;
-        Store.BlockList.remove(index);
-        System.out.println("Delete Successful!");
+        try {
+            index = S.nextInt() - 1;
+            Store.BlockList.remove(index);
+            System.out.println("Delete Successful!");
+        } catch (Exception e) {
+            System.out.println("input Mismatch");
+
+        }
     }
 
     public static void displayBlockHandler() {
         System.out.println("List of Blocks");
         if(Store.BlockList.size() == 0){
             System.out.println("There is no Block added, Please add Blocks  first in the Block menu!");
+            return;
         }
         for(int i = 0; i < Store.BlockList.size(); i++){
             System.out.println(String.format("%d)\tName: %s ", i+1, Store.BlockList.get(i).getName()));
@@ -106,22 +115,20 @@ public class Block {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int index, num;
         String str;
-        index = S.nextInt() - 1;
-        System.out.println("Which of the block's details do you want to update?");
-        displayBlockDetails(Store.BlockList.get(index));
-        int ch = S.nextInt();
-        switch (ch) {
-            case 1:
+
+        
                 try {
+                    index = S.nextInt() - 1;
+                    System.out.println("Which of the block's details do you want to update?");
+                    displayBlockDetails(Store.BlockList.get(index));
+                    int ch = S.nextInt();
+                    switch (ch) {
+                        case 1:
                     System.out.println("What should the new name be?");
                     str = reader.readLine();
                     Store.BlockList.get(index).setBlockName(str);
                     break;
 
-                } catch (IOException e) {
-                    //TODO: handle exception
-                    System.out.println("Menu.Error()");
-                }
             case 2:
                 System.out.println("What should the new number be?");
                 num = S.nextInt();
@@ -137,8 +144,14 @@ public class Block {
                 break;
         }
     }
+    catch(Exception e){
+        System.out.println("type incompatible");
+        }
+    
+    }
 
     public static void addBlockHandler() {
+      try{    
         Scanner S = new Scanner(System.in);
         BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
         String blockName;
@@ -157,8 +170,8 @@ public class Block {
         String name, phoneNumber;
         for(int i = 0; i < numberOfProctors; i++){
             System.out.println(String.format("Enter the name of proctor No %d", i+1));
-      
-            try{
+
+            try {
                 name = reader.readLine();
                 
                 
@@ -169,12 +182,13 @@ public class Block {
               
                 Proctor newProctor = new Proctor(name, phoneNumber, blockNumber);
                 proctorsList.add(newProctor);
+            } 
+           
+            catch(Exception exception){
+                System.out.println("type incompatible"); 
+                       }
 
-            }catch(IOException exception){
-                System.out.println(exception.toString());
-            }
-
-        }
+        
         Block newBlock = new Block(blockNumber, blockName, dormPerFloor, numberOfFloors);
         newBlock.addProctor(proctorsList);
         Store.BlockList.add(newBlock);
@@ -183,3 +197,9 @@ public class Block {
 
 
 }
+catch(Exception e){
+    System.out.println("incompatible type");
+}
+
+    }
+    }
