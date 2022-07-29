@@ -38,7 +38,7 @@ public class Menu {
 		  System.out.println("2) Display attendance");
 	      System.out.println("3) Report the taken attendance with evaluation");
 	      System.out.println("4) Back ");
-		  System.out.println(") EXIT ");
+		  System.out.println("5) Exit ");
 	     
 	}
 	
