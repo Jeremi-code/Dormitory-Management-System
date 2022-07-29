@@ -28,7 +28,7 @@ public class Block extends Operations implements Identifiers {
         //proctorsList.size();
         // this.proctorsList = proctorsList;
     }
-    public void addCleaner(ArrayList<Cleaner> CleanerLsst){
+    public void addCleaner(ArrayList<Cleaner> CleanerList){
         try {
     		this.CleanerList.addAll(CleanerList);
     		this.numberOfCleaners += CleanerList.size();
@@ -225,6 +225,7 @@ public class Block extends Operations implements Identifiers {
         numberOfFloors = S.nextInt();
         System.out.println("Enter dorm per floor for the block: ");
         dormPerFloor = S.nextInt();
+
         System.out.println("Enter number of proctors for the block: ");
         numberOfProctors = S.nextInt();
         String name, phoneNumber;
@@ -245,17 +246,11 @@ public class Block extends Operations implements Identifiers {
             }
 
         }
-        Block newBlock = new Block(blockNumber, blockName, dormPerFloor, numberOfFloors);
-        newBlock.addProctor(proctorsList);
-        Store.BlockList.add(newBlock);
-        System.out.println("Block Added Successfully!");
-        
         System.out.println("Enter number of Cleaners for the block: ");
         numberOfCleaners = S.nextInt();
         int CleanerAge;
         String CleanerName,CleanerGender, CleanerphoneNumber;
         for(int i = 0; i < numberOfCleaners; i++){
-            
             try{
                 System.out.println(String.format("Enter the name of Cleaner No %d", i+1));
                 CleanerName = reader.readLine(); 
@@ -275,9 +270,11 @@ public class Block extends Operations implements Identifiers {
             }catch(IOException exception){
                 System.out.println(exception.toString());
             }
-
         }
+        Block newBlock = new Block(blockNumber, blockName, dormPerFloor, numberOfFloors);
+        newBlock.addProctor(proctorsList);
+        newBlock.addCleaner(CleanerList);
+        Store.BlockList.add(newBlock);
+        System.out.println("Block Added Successfully!"); 
     }
-
-
 }

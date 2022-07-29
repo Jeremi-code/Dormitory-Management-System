@@ -66,13 +66,12 @@ public class Dorm {
 				}
 			}
 		}
-
 	public static void addDormHandler() {
 		Scanner sgc = new Scanner(System.in);
 		BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
 		int dormNumber, blockNumber, numberOfStudents;
 		ArrayList<Student> studentsList = new ArrayList<>();
-		if(Store.DormList.size() == 0){
+		if(Store.BlockList.size() == 0){
 			System.out.println("Add blocks first!");
 			try{
 				System.out.wait(1000);

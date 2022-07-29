@@ -15,10 +15,10 @@ import java.util.Scanner;
            if( Store.DormList.get(i).getDormNumber()==dormNum){
                for(int j=0;i< Store.DormList.get(i).studentsList.size(); j++){
                    if(Store.DormList.get(i).studentsList.get(j).getId()==idNum){
-                       Store.DormList.get(i).studentsList.get(j).attendance[index]=1;
+                    Store.DormList.get(i).studentsList.get(j).attendance[index]=1;
                    }
                    else
-                       System.out.println(" You entered wrong id Number, please try again.");
+                    System.out.println(" You entered wrong id Number, please try again.");
                }
            }
            else
@@ -26,6 +26,17 @@ import java.util.Scanner;
         }
     }
     public static void takeNewAttendance(){
+        int sizeCounter=0;
+        for (int i = 0; i < Store.DormList.size(); i++) {
+            for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++){
+                sizeCounter++;
+            } 
+        }
+        if(sizeCounter == 0){
+            System.out.println("There is no student to take attendance, please Add Studens first.");
+            return;
+        }
+        else{
           int dormNumber,dayNumber, id, number;
           Scanner sgc=new Scanner(System.in);
           System.out.println(" For how many students do you want to take an attendance? ");
@@ -49,21 +60,42 @@ import java.util.Scanner;
           }
               System.out.println(" Attendance is taken su   ");
     }
-    public static void updateAttendance(){
-
     }
     public static void displayAttendance(){
+        int sizeCounter=0;
+        for (int i = 0; i < Store.DormList.size(); i++) {
+            for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++){
+                sizeCounter++;
+            } 
+        }
+        if( sizeCounter == 0){
+            System.out.println("There is no student to take attendance, please Add Studens first.");
+            return;
+        }
+        else{
        Formatter sgc=new Formatter();
        sgc.format("%10s%10s%10s%10s%10s%10s","Name","Id","Dorm_Number","monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 
        for(int i=0;i<Store.DormList.size();i++){
            for(int j=0;j<Store.DormList.get(i).studentsList.size();j++){
-               sgc.format("%10s%10s%10s%10s%10s%10s", Store.DormList.get(i).studentsList.get(i).getStudentName(), Store.DormList.get(i).studentsList.get(i).getId(), Store.DormList.get(i).studentsList.get(i).getDormNumber(),  Store.DormList.get(i).studentsList.get(i).attendance[0],Store.DormList.get(i).studentsList.get(i).attendance[1] ,Store.DormList.get(i).studentsList.get(i).attendance[2],Store.DormList.get(i).studentsList.get(i).attendance[3],Store.DormList.get(i).studentsList.get(i).attendance[4],Store.DormList.get(i).studentsList.get(i).attendance[5],Store.DormList.get(i).studentsList.get(i).attendance[6]);
+               sgc.format("%10s%10s%10s%10s%10s%10s", Store.DormList.get(i).studentsList.get(j).getStudentName(), Store.DormList.get(i).studentsList.get(j).getId(), Store.DormList.get(i).studentsList.get(j).getDormNumber(),  Store.DormList.get(i).studentsList.get(j).attendance[0],Store.DormList.get(i).studentsList.get(i).attendance[1] ,Store.DormList.get(i).studentsList.get(j).attendance[2],Store.DormList.get(i).studentsList.get(i).attendance[3],Store.DormList.get(i).studentsList.get(i).attendance[4],Store.DormList.get(i).studentsList.get(j).attendance[5],Store.DormList.get(i).studentsList.get(j).attendance[6]);
                System.out.println(sgc);
            }
        }
     }
+    }
     public static void reportAttendance(){
+        int sizeCounter=0;
+        for (int i = 0; i < Store.DormList.size(); i++) {
+            for (int j = 0; j < Store.DormList.get(i).studentsList.size(); j++){
+                sizeCounter++;
+            } 
+        }
+        if(sizeCounter == 0){
+            System.out.println("There is no student to take attendance, please Add Studens first.");
+            return;
+        }
+        else{
         Formatter gcs=new Formatter();
         String evaluation;
         int absentCounter=0, presentCounter =0, unSignedDateCounter=0;
@@ -91,5 +123,6 @@ import java.util.Scanner;
                 System.out.println(gcs);
             }
         }
+    }
     }
 }

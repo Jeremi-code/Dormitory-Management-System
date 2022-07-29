@@ -11,9 +11,6 @@ public class Main {
             MainMenu:
             switch (choice) {
                 case 1:
-                    Menu.printStudentMenu();
-                    break;
-                case 2:
                     do {
                         Menu.printDormMenu();;
                         // again:
@@ -42,7 +39,7 @@ public class Main {
                         }
                     } while (choice != 6 && cnt == 1);
                     break;
-                case 3:
+                case 2:
                     do {
                         Menu.printBlockMenu();
                         choice = S.nextInt();
@@ -69,7 +66,7 @@ public class Main {
                         }
                     } while (choice != 6);
                     break;
-                case 4:
+                case 3:
                     do {
                         Menu.printAttendanceMenu();
                         choice = S.nextInt();
@@ -78,17 +75,14 @@ public class Main {
                                 Attendance.takeNewAttendance();
                                 break;
                             case 2:
-                                Attendance.updateAttendance();
-                                break;
-                            case 3:
                                 Attendance.displayAttendance();
                                 break;
-                            case 4:
+                            case 3:
                                 Attendance.reportAttendance();
                                 break;
-                            case 5:
+                            case 4:
                                 break MainMenu;
-                            case 6:
+                            case 5:
                                 cnt = 0;
                                 break;
                             default:
@@ -96,7 +90,7 @@ public class Main {
                         }
                     } while (choice != 6 && cnt == 1);
                     break;
-                case 5:
+                case 4:
                     do {
                         Menu.printCleanerMenu();
                         // Menu.printAttendanceMenu();
@@ -118,7 +112,7 @@ public class Main {
                         }
                     } while (choice != 6 && cnt == 1);
                     break;
-                case 6:
+                case 5:
                     cnt = 0;
                     break;
                 default:
@@ -127,3 +121,4 @@ public class Main {
         } while (choice != 6 && cnt == 1);
   }
 }
+                
