@@ -4,15 +4,14 @@ public class Main {
 	public static void main(String[] args){
 		Scanner S = new Scanner(System.in);
 		int choice;
-        do {
+        int cnt = 1;
+        try{
+            do {
             Menu.printMainMenu();
             choice = S.nextInt();
             MainMenu:
             switch (choice) {
                 case 1:
-                    Menu.printStudentMenu();
-                    break;
-                case 2:
                     do {
                         Menu.printDormMenu();;
                         // again:
@@ -33,14 +32,15 @@ public class Main {
                             case 5:
                                 break MainMenu;
                             case 6:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                                 // break again;
                         }
-                    } while (choice != 6);
+                    } while (choice != 6 && cnt == 1);
                     break;
-                case 3:
+                case 2:
                     do {
                         Menu.printBlockMenu();
                         choice = S.nextInt();
@@ -60,13 +60,14 @@ public class Main {
                             case 5:
                                 break MainMenu;
                             case 6:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                         }
                     } while (choice != 6);
                     break;
-                case 4:
+                case 3:
                     do {
                         Menu.printAttendanceMenu();
                         choice = S.nextInt();
@@ -75,52 +76,53 @@ public class Main {
                                 Attendance.takeNewAttendance();
                                 break;
                             case 2:
-                                Attendance.updateAttendance();
-                                break;
-                            case 3:
                                 Attendance.displayAll();
                                 break;
-                            case 4:
+                            case 3:
                                 Attendance.reportAttendance();
                                 break;
-                            case 5:
+                            case 4:
                                 break MainMenu;
-                            case 6:
+                            case 5:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                         }
-                    } while (choice != 6);
+                    } while (choice != 6 && cnt == 1);
                     break;
-                case 5:
-                    Menu.printCleanerMenu();
+                case 4:
                     do {
-                        Menu.printAttendanceMenu();
+                        Menu.printCleanerMenu();
+                        // Menu.printAttendanceMenu();
                         choice = S.nextInt();
                         switch (choice) {
                             case 1:
                                 Cleaner.addNewCleaner();
                                 break;
                             case 2:
-                                Cleaner.updateCleaner();
-                                break;
-                            case 3:
                                 Cleaner.displayCleanerList();
                                 break;
-                            case 4:
+                            case 3:
                                 break MainMenu;
-                            case 5:
+                            case 4:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                         }
-                    } while (choice != 6);
+                    } while (choice != 6 && cnt == 1);
                     break;
-                case 6:
+                case 5:
+                    cnt = 0;
                     break;
                 default:
                     System.out.println("Chocie not recognised! Please, try again\n");
             }
-        } while (choice != 6);
+        } while (choice != 6 && cnt == 1);
+    }catch(Exception e){
+                System.out.println("Incompatible type");
+    }
   }
 }
+                
