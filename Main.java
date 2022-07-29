@@ -5,7 +5,8 @@ public class Main {
 		Scanner S = new Scanner(System.in);
 		int choice;
         int cnt = 1;
-        do {
+        try{
+            do {
             Menu.printMainMenu();
             choice = S.nextInt();
             MainMenu:
@@ -119,6 +120,9 @@ public class Main {
                     System.out.println("Chocie not recognised! Please, try again\n");
             }
         } while (choice != 6 && cnt == 1);
+    }catch(Exception e){
+                System.out.println("Incompatible type");
+    }
   }
 }
                 

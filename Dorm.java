@@ -120,7 +120,7 @@ public class Dorm extends Operations implements Identifiers{
 					newDorm.addToStudentList(studentsList);
 					Store.DormList.add(newDorm);
 					System.out.println("The New Dorm Is Added Successfully!");
-				}catch(IOException e){
+				}catch(Exception e){
 					System.out.println("Error occured!");
 				}
 			}
