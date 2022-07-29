@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Block extends Operations implements Identifiers {
+public class Block {
     // public static final String ANSI_RESET = "\u001B[0m";
     // public static final String ANSI_YELLOW = "\u001B[33m";
     private int blockNumber;
@@ -62,9 +62,9 @@ public class Block extends Operations implements Identifiers {
 	public void setBlockName(String blockName) { this.blockName = blockName; }
     public void setNumberOfDorms(int numberOfDorms) { this.numberOfDorms = numberOfDorms; }
 
-    public static void delete() {
+    public static void removeBlockHandler() {
         System.out.println("Choose the block you want to delete: ");
-        displayAll();
+        displayBlockHandler();
         Scanner S = new Scanner(System.in);
         int index;
         try {
@@ -77,7 +77,7 @@ public class Block extends Operations implements Identifiers {
         }
     }
 
-    public static void displayAll() {
+    public static void displayBlockHandler() {
         System.out.println("List of Blocks");
         if(Store.BlockList.size() == 0){
             System.out.println("There is no Block added, Please add Blocks  first in the Block menu!");
@@ -100,45 +100,23 @@ public class Block extends Operations implements Identifiers {
         }
     }
 
-    
-    public static void displayOne(Block block){
+    public static void displayBlockDetails(Block block){
         System.out.println("Block details here...");
 
         System.out.println(String.format("1) Name: %s", block.getName()));
         System.out.println(String.format("2) Number: %s", block.getNumber()));
         System.out.println(String.format("3) Number of dorms: %d", block.getNumberOfDorms()));
-        System.out.println(String.format("4) Number of dorms: %d", block.getNumberOfProctors()));
-        ArrayList<Proctor> proctorsList= new ArrayList<>();
-
-        proctorsList.addAll(block.getProctorsList());
-        System.out.println(String.format(" Proctors of %s Block ", block.getName()));
-
-        for(int j = 0; j < proctorsList.size(); j++){
-            System.out.println(String.format("=======%d========", j+1));
-            System.out.println(String.format("Name: %s ", j+1, proctorsList.get(j).getName()));
-            System.out.println(String.format("Phone number: %s", proctorsList.get(j).getPhoneNumber()));
-        }
-        
     }
 
-    public static void update() {
+    public static void updateBlockHandler() {
         System.out.println("Choose the block you want to update the details of: ");
-        displayAll();
+        displayBlockHandler();
         Scanner S = new Scanner(System.in);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int index, num;
         String str;
-<<<<<<< HEAD
 
         
-=======
-        index = S.nextInt() - 1;
-        System.out.println("Which of the block's details do you want to update?");
-        displayOne(Store.BlockList.get(index));
-        int ch = S.nextInt();
-        switch (ch) {
-            case 1:
->>>>>>> c193e00706ed714bb3d18b7d7cb3a0392cab300b
                 try {
                     index = S.nextInt() - 1;
                     System.out.println("Which of the block's details do you want to update?");
@@ -166,7 +144,6 @@ public class Block extends Operations implements Identifiers {
                 break;
         }
     }
-<<<<<<< HEAD
     catch(Exception e){
         System.out.println("type incompatible");
         }
@@ -175,25 +152,8 @@ public class Block extends Operations implements Identifiers {
 
     public static void addBlockHandler() {
       try{    
-=======
-    public void read(){
-        System.out.println(String.format("Name %s", this.blockName));
-        System.out.println(String.format("Number %s", this.blockNumber));
-        System.out.println(String.format("Number of dorms %d", this.numberOfDorms));
-        System.out.println(String.format("Number of floors %s", this.blockName));
-        System.out.println(String.format("Number of dorms per floor %s", this.blockName));
-        System.out.println(String.format("Number of proctors %d", this.numberOfProctors));
-        for(int j = 0; j < this.proctorsList.size(); j++){
-            System.out.println(String.format("=======%d========", j+1));
-            System.out.println(String.format("Name: %s ", j+1, this.proctorsList.get(j).getName()));
-            System.out.println(String.format("Phone number: %s", this.proctorsList.get(j).getPhoneNumber()));
-        }
-    }
-    
-    public static void create() {
->>>>>>> c193e00706ed714bb3d18b7d7cb3a0392cab300b
         Scanner S = new Scanner(System.in);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
         String blockName;
         int blockNumber, numberOfFloors, dormPerFloor, numberOfProctors;
         ArrayList<Proctor> proctorsList = new ArrayList<>();
@@ -209,7 +169,6 @@ public class Block extends Operations implements Identifiers {
         numberOfProctors = S.nextInt();
         String name, phoneNumber;
         for(int i = 0; i < numberOfProctors; i++){
-<<<<<<< HEAD
             System.out.println(String.format("Enter the name of proctor No %d", i+1));
 
             try {
@@ -221,16 +180,6 @@ public class Block extends Operations implements Identifiers {
                 phoneNumber = reader.readLine();
 
               
-=======
-            
-            try{
-                System.out.println(String.format("Enter the name of proctor No %d", i+1));
-                name = reader.readLine();
-
-                System.out.println(String.format("Enter the phoneNumber of proctor No %d", i+1));
-                phoneNumber = reader.readLine();
-
->>>>>>> c193e00706ed714bb3d18b7d7cb3a0392cab300b
                 Proctor newProctor = new Proctor(name, phoneNumber, blockNumber);
                 proctorsList.add(newProctor);
             } 
