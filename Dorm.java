@@ -13,8 +13,6 @@ public class Dorm {
     public Dorm(int dormNumber, int numberOfStudents ) {
         this.dormNumber = dormNumber;
         this.numberOfStudents = 0;
-	//	this.block_Number = blockNumber;
-	    this.studentsList = studentsList;
     }
 
     public void addMember(Student student) {
@@ -53,27 +51,6 @@ public class Dorm {
 		System.out.println("The Data is Deleted Successfully!");
 	}
 	public static void displayDormHandler() {
-		/*
-		System.out.println("List of Dorms");
-		for(int i = 0; i < Store.DormList.size(); i++){
-			System.out.println(String.format(" \tName: %s ", i+1, Store.BlockList.get(i).getName()));
-			System.out.println(String.format(" \tDorm Number: %d ", Store.DormList.get(i).getDormNumber()));
-			System.out.println(String.format(" \tCurrent Number of Students: %d ", Store.DormList.get(i).getNumberOfStudents()));
-		//	System.out.println(String.format(" \tNumber of Proctors: %d ", Store.BlockList.get(i).getNumberOfProctors()));
-			ArrayList<Student> studentsList= new ArrayList<>();
-
-			studentsList.addAll(Store.DormList.get(i).getStudentsList());
-			System.out.println(String.format(" Students of Dorm are %s :", Store.DormList.get(i).()));
-			for(int j = 0; j < Store.DormList.size(); j++){
-				System.out.println(String.format(" %d)\tName: %s ", j+1, studentsList.get(j).getStudentName()));
-				System.out.println(String.format(" Id number : %d", studentsList.get(j).getId()));
-				System.out.println(String.format(" Gender : %s", studentsList.get(j).getGender()));
-				System.out.println(String.format(" Age : %d", studentsList.get(j).getAge()));
-				System.out.println(String.format(" Age : %d", studentsList.get(j).getAge()));
-
-			}
-		}    */
-
 		Formatter go7 = new Formatter();
 		System.out.println("List of Dorms");
 		for (int i = 0; i < Store.DormList.size(); i++) {
@@ -106,7 +83,7 @@ public class Dorm {
 		}
 		else{
 			System.out.println("Choose Block: ");
-			Block.displayBlockHandler();
+			Block.displayAll();
 			blockNumber = sgc.nextInt();
 		}
 		System.out.println("Enter Dorm number: ");
