@@ -78,7 +78,7 @@ public class Main {
                                 Attendance.updateAttendance();
                                 break;
                             case 3:
-                                Attendance.displayAttendance();
+                                Attendance.displayAll();
                                 break;
                             case 4:
                                 Attendance.reportAttendance();
