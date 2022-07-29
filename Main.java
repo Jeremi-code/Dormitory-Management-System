@@ -4,6 +4,7 @@ public class Main {
 	public static void main(String[] args){
 		Scanner S = new Scanner(System.in);
 		int choice;
+        int cnt = 1;
         do {
             Menu.printMainMenu();
             choice = S.nextInt();
@@ -33,12 +34,13 @@ public class Main {
                             case 5:
                                 break MainMenu;
                             case 6:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                                 // break again;
                         }
-                    } while (choice != 6);
+                    } while (choice != 6 && cnt == 1);
                     break;
                 case 3:
                     do {
@@ -60,6 +62,7 @@ public class Main {
                             case 5:
                                 break MainMenu;
                             case 6:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
@@ -86,41 +89,41 @@ public class Main {
                             case 5:
                                 break MainMenu;
                             case 6:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                         }
-                    } while (choice != 6);
+                    } while (choice != 6 && cnt == 1);
                     break;
                 case 5:
-                    Menu.printCleanerMenu();
                     do {
-                        Menu.printAttendanceMenu();
+                        Menu.printCleanerMenu();
+                        // Menu.printAttendanceMenu();
                         choice = S.nextInt();
                         switch (choice) {
                             case 1:
                                 Cleaner.addNewCleaner();
                                 break;
                             case 2:
-                                Cleaner.updateCleaner();
-                                break;
-                            case 3:
                                 Cleaner.displayCleanerList();
                                 break;
-                            case 4:
+                            case 3:
                                 break MainMenu;
-                            case 5:
+                            case 4:
+                                cnt = 0;
                                 break;
                             default:
                                 System.out.println("Chocie not recognised! Please, try again\n");
                         }
-                    } while (choice != 6);
+                    } while (choice != 6 && cnt == 1);
                     break;
                 case 6:
+                    cnt = 0;
                     break;
                 default:
                     System.out.println("Chocie not recognised! Please, try again\n");
             }
-        } while (choice != 6);
+        } while (choice != 6 && cnt == 1);
   }
 }
