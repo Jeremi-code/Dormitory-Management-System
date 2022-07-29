@@ -13,7 +13,7 @@ import java.util.Scanner;
         int index=dayNumber-1;
         for(int i=0; i < Store.DormList.size(); i++){
            if( Store.DormList.get(i).getDormNumber()==dormNum){
-               for(int j=0;i< Store.DormList.get(i).studentsList.size(); j++){
+               for(int j=0;j< Store.DormList.get(i).studentsList.size(); j++){
                    if(Store.DormList.get(i).studentsList.get(j).getId()==idNum){
                     Store.DormList.get(i).studentsList.get(j).attendance[index]=1;
                    }
@@ -58,7 +58,7 @@ import java.util.Scanner;
               id=sgc.nextInt();
               makeAttendance(dormNumber, dayNumber, id);
           }
-              System.out.println(" Attendance is taken su   ");
+              System.out.println(" Attendance is taken sccessfully!");
     }
     }
     public static void displayAll(){
@@ -73,12 +73,16 @@ import java.util.Scanner;
             return;
         }
         else{
+       System.out.println("Note: ");
+       System.out.println("Attendace status -1 for not yet taken");
+       System.out.println("Attendace status 0 for absent");
+       System.out.println("Attendace status 1 for present");
        Formatter sgc=new Formatter();
-       sgc.format("%10s%10s%10s%10s%10s%10s","Name","Id","Dorm_Number","monday","tuesday","wednesday","thursday","friday","saturday","sunday");
+       sgc.format("%10s%10s%10s%10s%10s%10s%10s%10s%10s%10s\n","Name","Id","Dorm_Number","monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 
        for(int i=0;i<Store.DormList.size();i++){
            for(int j=0;j<Store.DormList.get(i).studentsList.size();j++){
-               sgc.format("%10s%10s%10s%10s%10s%10s", Store.DormList.get(i).studentsList.get(j).getStudentName(), Store.DormList.get(i).studentsList.get(j).getId(), Store.DormList.get(i).studentsList.get(j).getDormNumber(),  Store.DormList.get(i).studentsList.get(j).attendance[0],Store.DormList.get(i).studentsList.get(i).attendance[1] ,Store.DormList.get(i).studentsList.get(j).attendance[2],Store.DormList.get(i).studentsList.get(i).attendance[3],Store.DormList.get(i).studentsList.get(i).attendance[4],Store.DormList.get(i).studentsList.get(j).attendance[5],Store.DormList.get(i).studentsList.get(j).attendance[6]);
+               sgc.format("%10s%10s%10s%10s%10s%10s%10s%10s%10s%10s\n", Store.DormList.get(i).studentsList.get(j).getStudentName(), Store.DormList.get(i).studentsList.get(j).getId(), Store.DormList.get(i).studentsList.get(j).getDormNumber(),  Store.DormList.get(i).studentsList.get(j).attendance[0],Store.DormList.get(i).studentsList.get(i).attendance[1] ,Store.DormList.get(i).studentsList.get(j).attendance[2],Store.DormList.get(i).studentsList.get(i).attendance[3],Store.DormList.get(i).studentsList.get(i).attendance[4],Store.DormList.get(i).studentsList.get(j).attendance[5],Store.DormList.get(i).studentsList.get(j).attendance[6]);
                System.out.println(sgc);
            }
        }
@@ -118,8 +122,8 @@ import java.util.Scanner;
                     evaluation="Warning.";
                 if( unSignedDateCounter != 0 )
                     evaluation="There are day(s) Beyond Current Date";
-                gcs.format("%10s%10s%10s%10s%10s%1s","Name","Id","Dorm Number","OneWeekEvaluation");
-                gcs.format("%10s%10s%10s%10s%10s%1s",Store.DormList.get(i).studentsList.get(i).getStudentName(), Store.DormList.get(i).studentsList.get(i).getId(), Store.DormList.get(i).studentsList.get(i).getDormNumber(),evaluation);
+                gcs.format("%10s%10s%10s%10s\n","Name","Id","Dorm Number","OneWeekEvaluation");
+                gcs.format("%10s%10s%10s%10s\n",Store.DormList.get(i).studentsList.get(i).getStudentName(), Store.DormList.get(i).studentsList.get(i).getId(), Store.DormList.get(i).studentsList.get(i).getDormNumber(), evaluation);
                 System.out.println(gcs);
             }
         }
