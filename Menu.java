@@ -12,12 +12,11 @@ public class Menu {
 	public static void printMainMenu() {
 		System.out.println("Choose from the Menu Below");
 		System.out.println("========Main Menu========");
-		System.out.println("1) Manage Student");
-		System.out.println("2) Manage Dorm");
-		System.out.println("3) Manage Block");
-		System.out.println("4) Manage Attendance");
-		System.out.println("5) Manage proctor's switching schedule");
-		System.out.println("6) Exit");
+		System.out.println("1) Manage Dorm");
+		System.out.println("2) Manage Block");
+		System.out.println("3) Manage Attendnace");
+		System.out.println("4) Manage Proctor's switching schedule");
+		System.out.println("5) Exit");
 	}
 	
 	public static void printBlockMenu() {
@@ -55,18 +54,7 @@ public class Menu {
 		  System.out.println("6) Exit ");
 
 	}
-	
-	public static void printStudentMenu() {
-		System.out.println("Choose from the Menu Below");
-	      System.out.println("======== Student Menu ========");
-	      System.out.println("1) Register New Student");
-	      System.out.println("2) Update students Details");
-	      System.out.println("3) Display Students");
-	      System.out.println("4) Remove Student");
-	      System.out.println("5) Back ");
-		  System.out.println("6) Exit ");
-	     
-	}
+
 
 	public static void printSwitchingMenu() {
 		System.out.println("Choose from the Menu Below");
