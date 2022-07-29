@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 public class Cleaner {
-    String cleanerName;
-    String cleanerGender;
-    int cleanerAge ;
-    String cleanerBlockNumber;
+    static String cleanerName;
+    static String cleanerGender;
+    static int cleanerAge ;
+    static String cleanerBlockNumber;
     private String cleanerPhoneNumber;
     int totalNumberOfCleaners;
 
@@ -23,7 +23,7 @@ public class Cleaner {
         return this.cleanerPhoneNumber;
     }
 
-    public void displayCleanerList(){
+    public static void displayCleanerList(){
        Formatter display=new Formatter();
        for(int i=0; i<Store.BlockList.CleanerList.size() ; i++) {
            for(int j=0; j< Store.BlockList.CleanerList.sizeOf() ; j++){
@@ -33,7 +33,7 @@ public class Cleaner {
        }
     }
 
-    public void addNewCleaner() {
+    public static void addNewCleaner() {
         ArrayList<Cleaner> CleanerList=new ArrayList<>();
         Scanner choice=new Scanner;
         System.out.println("How Many Cleaners Do You want to Add?");
@@ -61,7 +61,7 @@ public class Cleaner {
             CleanerList.add(newCleaner);
         }
     }
-    public void updateCleaner(){
+    public static void updateCleaner(){
         if(Store.BlockList.CleanerList.size() == 0){
             System.out.println("There is no cleaner to update, please add a cleaner first.");
             return;
