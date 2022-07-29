@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Formatter;
 
-public class Dorm {
+public class Dorm extends Operations implements Identifiers{
 	private int dormNumber;
 	private int numberOfStudents;
 	private int block_Number;
@@ -41,16 +41,16 @@ public class Dorm {
 	}
 	public ArrayList getStudentsList(){ return this.studentsList; }
 
-	public static void removeDormHandler(){
+	public static void delete(){
 		System.out.println("Choose the Dorm to remove all of it data : ");
-		displayDormHandler();
+		displayAll();
 		Scanner S = new Scanner(System.in);
 		int index;
 		index = S.nextInt() - 1;
 		Store.DormList.remove(index);
 		System.out.println("The Data is Deleted Successfully!");
 	}
-	public static void displayDormHandler() {
+	public static void displayAll() {
 		Formatter go7 = new Formatter();
 		System.out.println("List of Dorms");
 		for (int i = 0; i < Store.DormList.size(); i++) {
@@ -67,7 +67,7 @@ public class Dorm {
 			}
 		}
 
-	public static void addDormHandler() {
+	public static void create() {
 		Scanner sgc = new Scanner(System.in);
 		BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
 		int dormNumber, blockNumber, numberOfStudents;
@@ -120,16 +120,16 @@ public class Dorm {
 		System.out.println("The New Dorm Is Added Successfully!");
 	}
 
-	public static void updateDormHandler(){
+	public static void update(){
 		System.out.println("Choose the dorm you want to update the details of: ");
-		displayDormHandler();
+		displayAll();
 		Scanner S = new Scanner(System.in);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		int index, num;
 		String str;
 		index = S.nextInt() - 1;
 		System.out.println("Which of the Dorm's details do you want to update?");
-		Dorm.displayDormDetails(Store.DormList.get(index));
+		Dorm.displayOne(Store.DormList.get(index));
 		int ch = S.nextInt();
 		switch (ch) {
 			case 1:
@@ -153,12 +153,12 @@ public class Dorm {
 		}
 
 	}
-		private static void displayDormDetails(Dorm dorm) {
-			System.out.println("Dorm details here...");
-			System.out.println(String.format("1) Dorm Number: %s", dorm.getDormNumber()));
-			System.out.println(String.format("2) Block Number: %s", dorm.getBlock_Number()));
-			System.out.println(String.format("3) Number of Students: %d", dorm.getNumberOfStudents()));
-		}
+	private static void displayOne(Dorm dorm) {
+		System.out.println("Dorm details here...");
+		System.out.println(String.format("1) Dorm Number: %s", dorm.getDormNumber()));
+		System.out.println(String.format("2) Block Number: %s", dorm.getBlock_Number()));
+		System.out.println(String.format("3) Number of Students: %d", dorm.getNumberOfStudents()));
+	}
 
 
 	}
